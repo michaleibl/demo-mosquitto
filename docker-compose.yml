@@ -1,0 +1,43 @@
+name: demo-mosquitto-cluster
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0.19
+    container_name: demo-mosquitto-mqtt-broker
+    ports:
+      - "1883:1883"   # MQTT port
+    volumes:
+      - ./docker/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./docker/mosquitto_data:/mosquitto/data
+    networks:
+      - mqtt-net
+    restart: unless-stopped
+
+  node-red:
+    image: nodered/node-red:4.0.3-22
+    container_name: demo-mosquitto-node-red
+    ports:
+      - "1880:1880"  # Node-RED web UI port
+    volumes:
+      - ./docker/node-red_data:/data
+      - ./docker/node-red_flows.json:/data/flows.json
+    networks:
+      - mqtt-net
+    depends_on:
+      - mosquitto
+    restart: unless-stopped
+
+  demo-mosquitto:
+    image: demo-mosquitto:1.0.0
+    container_name: demo-mosquitto-application
+    depends_on:
+      - mosquitto
+    networks:
+      - mqtt-net
+    environment:
+      - MQTT_BROKER_HOSTNAME=mosquitto
+    restart: unless-stopped
+
+networks:
+  mqtt-net:
+    driver: bridge

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "11367f913e0875c9",
+    "type": "tab",
+    "label": "Mosquitto Debug Flow",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "5ec605e9f4cadeb4",
+    "type": "mqtt in",
+    "z": "11367f913e0875c9",
+    "name": "mosquitto test/topic",
+    "topic": "test/topic",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "9a0eacb9f73e0f41",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 140,
+    "y": 80,
+    "wires": [
+      [
+        "a2c05c9fe18ea154"
+      ]
+    ]
+  },
+  {
+    "id": "a2c05c9fe18ea154",
+    "type": "debug",
+    "z": "11367f913e0875c9",
+    "name": "debugger",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 470,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "9a0eacb9f73e0f41",
+    "type": "mqtt-broker",
+    "name": "mosquitto",
+    "broker": "mosquitto",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": "false",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closeRetain": "false",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": "false",
+    "willPayload": "",
+    "willMsg": {},
+    "userProps": "",
+    "sessionExpiry": ""
+  }
+]
